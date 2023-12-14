@@ -25,10 +25,10 @@ class AppointmentSchedule extends Mailable {
 	 */
 	public function envelope(): Envelope {
 		return new Envelope(
-			subject: 'Appointment Schedule',
+			subject: '<no-reply>' . config('app.name') . ' Online Applicant Submission Notice',
 			from: new Address(
 				env('MAIL_FROM_ADDRESS'),
-				'Testing Admission',
+				config('app.name') . ' Office of the Admission and Online Services',
 			),
 		);
 	}
@@ -38,7 +38,7 @@ class AppointmentSchedule extends Mailable {
 	 */
 	public function content(): Content {
 		return new Content(
-			markdown: 'emails.admission',
+			markdown: 'emails.appointment_schedule',
 		);
 	}
 

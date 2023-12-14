@@ -11,32 +11,36 @@
 	  <meta name="csrf-token" content="{{ csrf_token() }}"/>
 	  <meta name="grecaptcha-key" content="{{ env('GOOGLE_RECAPTCHA_CLIENT_KEY') }}"/>
 	 	<meta name="description" content="{{ $description }}" />
-		<meta name="abstract" content="Online Application of Golden Minds Colleges"  />
-	  <meta name="copyright" content="Golden Minds Bulacan"  />
+		<meta name="abstract" content="Online Admission of {{ config('app.name') }}"  />
+	  <meta name="copyright" content="{{ config('app.name') }}"  />
 	  <meta name='Classification' content='Education'/>
 	  <meta name='identifier-URL' content='{{ url()->current() }}'/>
 	  <meta name="msapplication-TileImage" content="{{ asset('/favicon.png') }}" />
 	  <!--<meta author='Jerome Avecilla' content='Developer: https://javecilla.vercel.app'/>-->
 	  <!--The SEO Framework by Jerome Avecilla -->
-	  <meta property="article:author" content="https://www.facebook.com/gmcstamaria2015"/>
-	  <meta property="article:publisher" content="https://www.facebook.com/gmcstamaria2015"/>
 	  <meta property="og:image" content="{{ asset('/ogimage.png') }}" />
-	  <meta property="og:image:width" content="608">
-	  <meta property="og:image:height" content="260">
-	  <meta property="og:image:alt" content="Golden Minds Colleges" />
+	  <meta property="og:image:width" content="608"/>
+	  <meta property="og:image:height" content="260"/>
+	  <meta property="og:image:alt" content="{{ config('app.name') }} - {{ $title }}" />
 	  <meta property="og:image:secure_url" content="{{ asset('/favicon.png') }}"/>
-	  <meta property="og:locale" content="en_US">
-	  <meta property="og:type" content="website">
+	  <meta property="og:locale" content="en_US"/>
+	  <meta property="og:type" content="website"/>
 	 	<meta property="og:title" content="@isset($title) {{ $title }} | @endisset Golden Minds Bulacan" />
-	  <meta property="og:description" content="test" />
+	  <meta property="og:description" content="{{ $description }}" />
 	  <meta property="og:url" content="{{ url()->current() }}" />
-	  <meta property="og:site_name" content="Golden Minds Bulacan"/>
-	 	{{--  <meta name="recaptcha-key" content="{{ env('RECAPTCHA_FRONTEND_KEY') }}"/> --}}
-	  <title>@isset($title) {{ $title }} | @endisset {{ __('Golden Minds Bulacan') }}</title>
+	  <meta property="og:site_name" content="Online Admission - {{ config('app.name') }}"/>
+		<meta property="fb:app_id" content="100924508936440"/>
+		<meta property="article:author" content="https://www.facebook.com/gmcstamaria2015"/>
+	  <meta property="article:publisher" content="https://www.facebook.com/gmcstamaria2015"/>
+	  <title>@isset($title) {{ $title }} | @endisset {{ config('app.name') }}</title>
 	  {{-- Favicon --}}
 		<link rel="shortcut icon" type="image/png" sizes="16x16" href="{{ asset('/favicon.png') }}" />
 		<link rel="apple-touch-icon" type="image/png" sizes="16x16"  href="{{ asset('/favicon.png') }}" />
+		<link rel="alternate" type="application/rss+xml" title="{{ config('app.name') }} Colleges and Academy - Is a distinguished private school providing tuition-free education. Our institution is committed to nurturing graduates who excel in the ever-evolving global landscape." href="https://www.goldenmindsbulacan.com/" />
+		<link rel="alternate" type="application/rss+xml" title="{{ config('app.name') }} - News" href="https://www.goldenmindsbulacan.com/news" />
+		<link rel="canonical" href="{{ url()->current() }}"/>
 		{{-- Google Fonts --}}
+		<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
 		<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin/>
 	  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@500&display=swap" defer/>
 	  {{-- Library and plugin css and js links --}}
@@ -44,13 +48,13 @@
 	  <link rel="stylesheet" href="{{ asset('/global/assets/libs/fontawesome@6.0/css/all.min.css') }}"/>
 	  <link rel="stylesheet" href="{{ asset('/global/assets/libs/sweetalert2@11/dist/sweetalert2.min.css') }}"/>
 	  <link rel="stylesheet" href="{{ asset('/global/assets/libs/toastr/toastr.min.css') }}"/>
+	  <link rel="stylesheet" href="{{ asset('/global/assets/libs/preloader/preloader.css') }}"/>
+	  <link rel="stylesheet" href="{{ asset('/global/assets/libs/wow/wow.min.css') }}"/>
 	  <script src="{{ asset('/global/assets/libs/jquery@3.7.1/jquery.min.js') }}" type="text/javascript"></script>
 	  {{-- Custom css links --}}
 	  <link rel="stylesheet" href="{{ asset('/global/assets/custom/stylesheets/app.css?v=1.0') }}"/>
 	  {{-- reCaptcha API Library --}}
 	  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-{{-- 	  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-    async defer></script> --}}
   </head>
   <body>
 	  {{-- Header --}}
@@ -66,7 +70,7 @@
 		              	{{ __('(+63) 939 449 9844')}}
 		              </small>
 		            </a>&nbsp;&nbsp;&nbsp;
-		            <a href="mailto:admission@goldenmindsbulacan.com" class="ml-10 d-none d-lg-inline h_links">
+		            <a href="mailto:admission@goldenminds.edu.ph" class="ml-10 d-none d-lg-inline h_links">
 		              <small><i class="fa-solid fa-envelope"></i>&nbsp;
 		              	{{ __('admission@goldenminds.edu.ph')}}
 		              </small>
@@ -87,7 +91,7 @@
 		            <span class="ml-10">
 		              <small><i class="fa-brands fa-linkedin-in"></i></small>
 		            </span>&nbsp;&nbsp;
-		            <a href="mailto:info@goldenmindsbulacan.com"
+		            <a href="mailto:info@goldenminds.edu.ph"
 		            	class="d-lg-none ml-10 h_links">
 		              <small><i class="fa-solid fa-envelope"></i></small>
 		            </a>&nbsp;&nbsp;
@@ -101,23 +105,25 @@
 	    	</x-app-container>
 	  	</div>
 		</x-header>
-		{{-- Hero card --}}
-		<x-section class="bg-white mb-3 ">
-	  	<img src="{{ asset('/global/assets/images/header6.PNG') }}"
-	  		class="card-img-top" alt="header" loading="lazy"/>
-		</x-section>
 		{{-- Main --}}
 	  <x-main>
 	    {{ $slot }}
 	  </x-main>
+	  {{-- Footer --}}
+	  <x-footer class="mt-auto text-center mb-4">
+    	<small class="text-muted">
+    		<span>&copy; {{ __('2023') }} <a href="https://www.goldenmindsbulacan.com/" target="_blank"
+    			class="text-muted text-decoration-none">{{ config('app.name') }}</a>
+    		</span><br/>
+    		<span>{{ __('Maintain and Manage by Information System') }}</span>
+    	</small>
+  	</x-footer>
 	  {{-- Library and plugin js links --}}
 	  <script src="{{ asset('/global/assets/libs/bootstrap@5.3.2/js/bootstrap.bundle.min.js') }}"></script>
 	  <script src="{{ asset('/global/assets/libs/fontawesome@6.0/js/all.min.js') }}"></script>
 	  <script src="{{ asset('/global/assets/libs/sweetalert2@11/dist/sweetalert2.all.min.js') }}"></script>
 	  <script src="{{ asset('/global/assets/libs/toastr/toastr.min.js') }}"></script>
-	  {{-- Custom Scripts --}}
-	  <script src="{{ asset('/global/assets/custom/scripts/helper.js?v=1.0') }}"></script>
-	  <script src="{{ asset('/global/assets/custom/scripts/formValidations.js?v=1.0') }}"></script>
-	  <script src="{{ asset('/global/assets/custom/scripts/app.js?v=1.0') }}"></script>
+	  <script src="{{ asset('/global/assets/libs/preloader/preloader.js') }}"></script>
+	  <script src="{{ asset('/global/assets/libs/wow/wow.min.js') }}"></script>
   </body>
 </html>

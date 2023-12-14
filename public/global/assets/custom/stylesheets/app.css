@@ -86,6 +86,24 @@ input[type=checkbox]:checked {
    border-color: #b4813f!important;
 }
 
+/*Moving image*/
+.moving_image {
+   animation: moveUpDown 4s ease-in-out infinite!important;
+   pointer-events: none!important;
+}
+
+@keyframes moveUpDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 /**Styling header title**/
 .gradient_header {
   background-image: linear-gradient(to left, #373D3F, #373D3F, #555F61);
@@ -124,7 +142,7 @@ input[type=checkbox]:checked {
 }
 
 /**Styling Form**/
-.form_card {
+.form_card, .card_box {
   padding: 2em;
   background: #ffffff;
   border: 2px solid var(--bs-secondary-bg);

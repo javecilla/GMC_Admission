@@ -1,5 +1,6 @@
-@extends('errors::minimal')
+@extends('errors/layout')
 
-@section('title', __('Server Error'))
+@section('title', __('500 INTERNAL SERVER ERROR'))
 @section('code', '500')
-@section('message', __('Server Error'))
+@section('header', __('Internal Server Error'))
+@section('message', __('An error occurred on the server. Please try again later or contact the administrator.'))

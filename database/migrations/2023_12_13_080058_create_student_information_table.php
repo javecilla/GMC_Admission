@@ -55,7 +55,7 @@ return new class extends Migration {
 			$table->string('referral_number')->nullable();
 			$table->string('grade10_adviser')->nullable();
 			$table->string('grade10_section')->nullable();
-			$table->string('good_moral');
+			$table->string('good_moral')->nullable();
 			$table->string('card')->nullable();
 			$table->string('f137')->nullable();
 			$table->string('psa')->nullable();

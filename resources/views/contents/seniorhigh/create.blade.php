@@ -1,5 +1,12 @@
 <x-app-layout title="Admission - SHS">
-  <x-slot name="description">admission registration description here...</x-slot>
+  <x-slot name="description">
+  	{{ __('GMC Senior High School effectively equips students with above level skills.
+  	Seize your future! Enroll now at GMC Senior High. Dream big, aim higher. New students and transferees are welcome at all levels. Your journey starts here!') }}
+  </x-slot>
+  <x-section class="bg-white mb-3 ">
+	  <img src="{{ asset('/global/assets/images/header6.PNG') }}"
+	  	class="card-img-top" alt="header" loading="lazy"/>
+	</x-section>
   <x-section>
   	<x-app-container class="mb-5">
   		{{-- Note Alert --}}
@@ -19,10 +26,10 @@
 				<x-form method="POST" action="{{ route('application.store') }}" id="seniorHighForm">
 					{{-- Progess Bar --}}
           <ul id="progressbar">
-            <li class="active" id="applyingFor"><strong>Applying For</strong></li>
-            <li id="personalInformation"><strong>Personal Information</strong></li>
-           	<li id="addressDetails"><strong>Address and Contact Details</strong></li>
-            <li id="finishRegistration"><strong>Finalize Application Form</strong></li>
+            <li class="active" id="applyingFor"><strong>{{ __('Applying For') }}</strong></li>
+            <li id="personalInformation"><strong>{{ __('Personal Information') }}</strong></li>
+           	<li id="addressDetails"><strong>{{ __('Address and Contact Details') }}</strong></li>
+            <li id="finishRegistration"><strong>{{ __('Finalize Application Form') }}</strong></li>
           </ul>
 
 					<x-step-one> {{-- step 1 --}}
@@ -107,7 +114,7 @@
 							<hr class="text-muted" />{{-- Button next --}}
 							<div class="d-flex justify-content-center align-items-center">
 								<div class="buttons">
-									<a href="javascript:void(0)" class="btn btn-light back_button">
+									<a href="{{ route('application.index') }}" class="btn btn-light back_button">
 							  		{{ __('Back') }}
 			 						</a>
 								 	<button type="button" class="btn btn-light next_button" id="firstStepBtn">
@@ -504,7 +511,7 @@
 									<div class="row mt-3">
 										<div class="col-md-6 mb-3">
 						          <div class="input-group has-validation">
-				                <span class="input-group-text">PSA</span>
+				                <span class="input-group-text">{{ __("PSA") }}</span>
 				                <input list="psaCopyList" id="psa" class="form-control"
 				                	placeholder="Please specify your psa submitted"
 				                />
@@ -519,7 +526,7 @@
 											<div class="form-check">
 						            <input type="checkbox" class="form-check-input document-checkbox"
 						            	id="documentForm137" data-target="form137" value="Ok" />
-						            <label class="form-check-label" for="documentForm137">Form 137</label>
+						            <label class="form-check-label" for="documentForm137">{{ __("Form 137") }}</label>
 						            <input type="hidden" id="form137" class="documentsChecked" />
 						          </div>
 										</div>
@@ -527,7 +534,7 @@
 											<div class="form-check">
 						            <input type="checkbox" class="form-check-input document-checkbox"
 						            	id="documentCard" data-target="card"/>
-						            <label class="form-check-label" for="documentCard">Card</label>
+						            <label class="form-check-label" for="documentCard">{{ __("Card") }}</label>
 						            <input type="hidden" id="card" class="documentsChecked"/>
 						          </div>
 										</div>
@@ -535,7 +542,7 @@
 											<div class="form-check">
 						            <input type="checkbox" class="form-check-input document-checkbox"
 						            	id="documentGoodMoral" data-target="goodMoral"/>
-						            <label class="form-check-label" for="documentGoodMoral">Good Moral</label>
+						            <label class="form-check-label" for="documentGoodMoral">{{ __("Good Moral") }}</label>
 						            <input type="hidden" id="goodMoral" />
 						          </div>
 										</div>
@@ -545,7 +552,7 @@
 											<div class="form-check">
 						            <input type="checkbox" class="form-check-input document-checkbox"
 						            	id="documentID" data-target="Id"/>
-						            <label class="form-check-label" for="documentID">ID</label>
+						            <label class="form-check-label" for="documentID">{{ __("ID") }}</label>
 						            <input type="hidden" id="Id"/>
 						          </div>
 										</div>
@@ -553,7 +560,7 @@
 											<div class="form-check">
 						            <input type="checkbox" class="form-check-input document-checkbox"
 						            	id="documentPEshirt" data-target="peShirt"/>
-						            <label class="form-check-label" for="documentPEshirt">PE Shirt</label>
+						            <label class="form-check-label" for="documentPEshirt">{{ __("PE Shirt") }}</label>
 						            <input type="hidden" id="peShirt"/>
 						          </div>
 										</div>
@@ -561,7 +568,7 @@
 											<div class="form-check">
 						            <input type="checkbox" class="form-check-input document-checkbox"
 						            	id="documentWaiver" data-target="waiver"/>
-						            <label class="form-check-label" for="documentWaiver">Waiver</label>
+						            <label class="form-check-label" for="documentWaiver">{{ __("Waiver") }}</label>
 						            <input type="hidden" id="waiver" />
 						          </div>
 										</div>
@@ -569,7 +576,7 @@
 											<div class="form-check">
 						            <input type="checkbox" class="form-check-input document-checkbox"
 						            	id="documentUniform" data-target="uniform"/>
-						            <label class="form-check-label" for="documentUniform">Uniform</label>
+						            <label class="form-check-label" for="documentUniform">{{ __("Uniform") }}</label>
 						            <input type="hidden" id="uniform"/>
 						          </div>
 										</div>
@@ -577,7 +584,7 @@
 											<div class="form-check">
 						            <input type="checkbox" class="form-check-input document-checkbox"
 						            	id="documentAllowance" data-target="allowance"/>
-						            <label class="form-check-label" for="documentAllowance">Allowance</label>
+						            <label class="form-check-label" for="documentAllowance">{{ __("Allowance") }}</label>
 						            <input type="hidden" id="allowance" />
 						          </div>
 										</div>
@@ -585,7 +592,7 @@
 											<div class="form-check">
 						            <input type="checkbox" class="form-check-input document-checkbox"
 						            	id="documentDocumentFiled" data-target="documentFiled"/>
-						            <label class="form-check-label" for="documentDocumentFiled">Document Filed</label>
+						            <label class="form-check-label" for="documentDocumentFiled">{{ __("Document Filed") }}</label>
 						            <input type="hidden" id="documentFiled" />
 						          </div>
 										</div>
@@ -618,3 +625,7 @@
     </x-app-container>
   </x-section>
 </x-app-layout>
+{{-- Custom Scripts --}}
+<script src="{{ asset('/global/assets/custom/scripts/helper.js?v=1.0') }}"></script>
+<script src="{{ asset('/global/assets/custom/scripts/formValidations.js?v=1.0') }}"></script>
+<script src="{{ asset('/global/assets/custom/scripts/app.js?v=1.0') }}"></script>

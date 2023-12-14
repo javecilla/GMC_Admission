@@ -41,9 +41,20 @@ jQuery(document).ready(function() {
 	$(document).on('click', '#secondStepBtn', function(e) {
 		e.preventDefault();
 		if (!step1Completed) {
-			// Alert user to complete step 1 before proceeding to step 2
-			alert("Please complete Step 1 before proceeding.");
-			return;
+			Swal.fire({
+				title: '',
+				title: `Oppss! Warning`,
+				html: `<small>Please complete Step 1 before proceeding.`,
+				imageUrl: "/favicon.png",	
+				imageWidth: 140,	
+				imageHeight: 140,	
+				imageAlt: "School-Logo",
+				showConfirmButton: true,
+				confirmButtonText: "Okay",
+				confirmButtonColor: "#b4813f",
+			}).then((result) => {
+				return (result.isConfirm) ? true : false;
+			});
 		}
 		const dataForm2 = retrieveFormDataFromStep2();
 		let validationResultStep2 = validateFormStep2(dataForm2);
@@ -66,8 +77,20 @@ jQuery(document).ready(function() {
 	$(document).on('click', '#thirdStepBtn', function(e) {
 		e.preventDefault();
 		if (!step2Completed) {
-			alert("Please complete Step 2 before proceeding.");
-			return;
+			Swal.fire({
+				title: '',
+				title: `Oppss! Warning`,
+				html: `<small>Please complete Step 2 before proceeding.`,
+				imageUrl: "/favicon.png",	
+				imageWidth: 140,	
+				imageHeight: 140,	
+				imageAlt: "School-Logo",
+				showConfirmButton: true,
+				confirmButtonText: "Okay",
+				confirmButtonColor: "#b4813f",
+			}).then((result) => {
+				return (result.isConfirm) ? true : false;
+			});
 		}
 		const dataForm3 = retrieveFormDataFromStep3();
 		let validationResultStep3 = validateFormStep3(dataForm3);
@@ -90,8 +113,20 @@ jQuery(document).ready(function() {
 	$(document).on('submit', '#seniorHighForm', function(e) {
 		e.preventDefault();
 		if (!step3Completed) {
-			alert("Please complete Step 3 before proceeding.");
-			return;
+			Swal.fire({
+				title: '',
+				title: `Oppss! Warning`,
+				html: `<small>Please complete Step 3 before proceeding.`,
+				imageUrl: "/favicon.png",	
+				imageWidth: 140,	
+				imageHeight: 140,	
+				imageAlt: "School-Logo",
+				showConfirmButton: true,
+				confirmButtonText: "Okay",
+				confirmButtonColor: "#b4813f",
+			}).then((result) => {
+				return (result.isConfirm) ? true : false;
+			});
 		}
 		// Perform validation before submitting the form
 		const dataForm4 = retrieveFormDataFromStep4();
@@ -135,7 +170,6 @@ jQuery(document).ready(function() {
 		        return new Promise(function(resolve) { 
 		          setTimeout(function () { 
 		            //console.table(combinedData);
-		            // Todo: ajax logic here..
 		            $.ajax({
 		            	method: 'POST',
 		            	url: '/senior-high-school/registration/store',
@@ -146,13 +180,13 @@ jQuery(document).ready(function() {
 					        },
 					        success: function(response) {
 					        	//console.log('Data being sent to server:', combinedData);
+					        	console.log(response.message);
+					        	//check server response
 					        	if(response.success) {
-					        		console.log(response.message);
-					        		//let applicantEmail = response.applicantEmail;
 					        		submitForm.fire({
 							          title: '',
 							          title: `${response.message}`,
-										   	html: `<small>Please note that the appointment schedule has been sent to the email address <strong>${response.applicantEmail}</strong>. Kindly review your appointment details to complete the submission of your credentials to the school.<br/><br/> Thank you for submitting your application.<br/>-GMC Office of the Admissions</small>`,
+										   	html: `<small>Please note that the appointment schedule has been sent to the email address <strong>${response.applicantEmail}</strong>. Kindly review your appointment details to complete the submission of your credentials to the school.<br/><br/> Thank you for submitting your application.<br/>-GMC Office of the Admissions and Online Services</small>`,
 										    imageUrl: "/favicon.png",
 											  imageWidth: 140,
 											  imageHeight: 140,
@@ -162,15 +196,15 @@ jQuery(document).ready(function() {
 										    confirmButtonColor: "#b4813f",
 							        }).then((result) => {
 							        	grecaptcha.reset(); // Reinitialize recaptcha widget
-					        			submitForm.close(); // Close the swal
+							        	localStorage.clear(); // Clear all stored data in localStorage
+							        	// then redirect to index page
+							        	window.location.href='http://admission.goldenminds.edu.test/';
 							        });
 					        	} else {
-					        		console.log(response.message);
 					        		toastr.error(response.message);
 					        		grecaptcha.reset(); // Reinitialize recaptcha widget
 					        		submitForm.close();
 					        	}
-					        	
 					        },
 					        error: function(xhr, status, error) {
     								const response = JSON.parse(xhr.responseText);
@@ -179,19 +213,18 @@ jQuery(document).ready(function() {
 								        const errorMessage = response.errors['g-recaptcha-response'][0];
 								        toastr.error(errorMessage);
 								    } else {
-								    	toastr.error('Something went wrong!');
+								    	toastr.error('Something went wrong! Please try again.');
 								    }
 						        grecaptcha.reset();
 						        submitForm.close();
 					        }
 		            }); //end ajax
-		           }, 2000); //end set timeout
+		           }, 1000); //end set timeout
 		        }); // end promise
 		      } // end else for checking response
 		    }, // end preconfirm
 		    allowOutsideClick: () => !submitForm.isLoading()
 		  }); //end swal
 		} //end if checking validation result4
-	});
-	// ============= END SUBMIT THE APPLICATION FORM =============
+	}); // ============= END SUBMIT THE APPLICATION FORM =============
 });

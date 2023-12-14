@@ -27,7 +27,7 @@ class EmailService {
 		if (!$result) {
 			throw new FailedSendAppointmentException('Failed to send appointment', 422);
 		}
-
+		//return success response to the client side
 		return [
 			'success' => true,
 			'message' => 'Your Application Submitted Successfully!',

@@ -12,7 +12,7 @@ use App\Services\EmailService;
 use App\Services\RecaptchaService;
 use Illuminate\Http\Request;
 
-class AdmissionController extends Controller {
+class AdmissionSeniorHighController extends Controller {
 	// To view application form
 	public static function create(Request $request) {
 		return view('contents.seniorhigh.create');
@@ -36,7 +36,7 @@ class AdmissionController extends Controller {
 				'strand' => $admissionRequest->input('strandList'),
 				'lrn' => $admissionRequest->input('LRN'),
 				//full name of the applicant e.g., Avecilla, Jerome Jr. S.
-				'learners_name' => $admissionRequest->input('lastName') . ', ' . $admissionRequest->input('firstName') . $admissionRequest->input('extensionName') . $admissionRequest->input('middleName'),
+				'learners_name' => $admissionRequest->input('lastName') . ', ' . $admissionRequest->input('firstName') . ' ' . $admissionRequest->input('extensionName') . ' ' . $admissionRequest->input('middleName'),
 				'last_name' => $admissionRequest->input('lastName'),
 				'extension_name' => $admissionRequest->input('extensionName'),
 				'first_name' => $admissionRequest->input('firstName'),
